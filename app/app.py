@@ -1,14 +1,13 @@
 from flask import Flask, request
+import os
 import redis
 
 app = Flask(__name__)
 
 r = redis.Redis()
 
-# redis_host = os.environ.get('REDIS_HOST')
-# redis_port = os.environ.get('REDIS_PORT')
-redis_host = 'localhost'
-redis_port = 6379
+redis_host = os.environ.get('REDIS_HOST')
+redis_port = os.environ.get('REDIS_PORT')
 
 r = redis.Redis(host=redis_host, port=redis_port, decode_responses=True)
 
@@ -27,4 +26,4 @@ def landing():
     return message
 
 if __name__ == "__main__":
-  app.run()
+  app.run(host='0.0.0.0')
